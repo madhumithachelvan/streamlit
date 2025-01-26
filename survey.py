@@ -3,7 +3,7 @@ import pandas as pd
 import time
 import os
 from datetime import datetime
-
+import glob
 
 def sidebar_navigation():
     st.sidebar.title("Navigation")
@@ -585,7 +585,6 @@ def page7():
               #      st.error(f"Attention check failed. Expected: {expected_answer}. Please follow the instructions.")
               #      return
 
-
             if is_slider_selected and is_confidence_selected:
                 st.session_state["responses"][current_index]["completed"] = True
 
@@ -704,18 +703,26 @@ def page9():
     st.header("Admin Section")
     password = st.text_input("Enter the password to download responses", type="password")
 
-    # Hardcoded password (for simplicity; use environment variables for production)
-    if password == "qwer":
-        if os.path.isfile(filename):
-            with open(filename, "rb") as file:
-                st.download_button(
-                    label="Download Responses",
-                    data=file,
-                    file_name=filename,
-                    mime="text/csv",
-                )
+    admin_password = os.getenv("qwer", "qwer")
+
+    if password == admin_password:
+        st.success("Password verified. You can now download the responses.")
+
+        # List all files matching the pattern "survey_responses_*.csv"
+        files = glob.glob("survey_responses_*.csv")
+
+        if files:
+            st.write("Available response files:")
+            for file in files:
+                with open(file, "rb") as f:
+                    st.download_button(
+                        label=f"Download {file}",
+                        data=f,
+                        file_name=file,
+                        mime="text/csv",
+                    )
         else:
-            st.warning("No responses found.")
+            st.warning("No response files found.")
     elif password:
         st.error("Incorrect password.")
 
