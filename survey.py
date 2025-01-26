@@ -700,6 +700,24 @@ def page9():
             except Exception as e:
                 st.error(f"An error occurred while saving your response: {e}")
 
+    st.markdown("---")
+    st.header("Admin Section")
+    password = st.text_input("Enter the password to download responses", type="password")
+
+    # Hardcoded password (for simplicity; use environment variables for production)
+    if password == "qwer":
+        if os.path.isfile(filename):
+            with open(filename, "rb") as file:
+                st.download_button(
+                    label="Download Responses",
+                    data=file,
+                    file_name=filename,
+                    mime="text/csv",
+                )
+        else:
+            st.warning("No responses found.")
+    elif password:
+        st.error("Incorrect password.")
 
 
 
