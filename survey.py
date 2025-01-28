@@ -270,7 +270,7 @@ def page4():
         unsafe_allow_html=True,
     )
 
-    def display_example(example_text, slidervalue, confidence_level, reasoning_text, font_size="16px"):
+    def display_example(example_text, slidervalue, meanings, confidence_level, reasoning_text, font_size=""):
         # Display example text with custom font size
         st.markdown(f"<span style='font-size: {font_size};'><b>Example:</b> {example_text}</span>",
                     unsafe_allow_html=True)
@@ -292,9 +292,14 @@ def page4():
                 key=f"slider_{example_text}",  # Unique key for the slider
             )
 
+
+        # Display the selected value and its meaning
+        st.write(f"Selected value: {slidervalue}: {meanings}")
+
         # Add "Very Masculine" label on the right
         with colu3:
             st.markdown("<div style='text-align: left;'>Very Masculine</div>", unsafe_allow_html=True)
+            # Map the selected value to its meaning
 
 
             # Confidence level in a select box
@@ -322,6 +327,7 @@ def page4():
         display_example(
             example_text="**1** I couldn’t stop thinking about how kind and thoughtful her gesture was. It felt like a warm hug on a cold day, something I really needed. Perhaps it’s silly to be so sentimental, but it meant the world to me.",
             slidervalue=1,
+            meanings= "Very Feminine (1)",
             confidence_level=4,  # Very Confident
             reasoning_text="Emotional tone, descriptive language, and use of hedging (perhaps) create a strong feminine impression.",
             font_size="18px"  # Custom font size for this example
@@ -331,6 +337,7 @@ def page4():
         display_example(
             example_text="**2** The atmosphere was calming, with soft lighting and gentle music in the background. It created a sense of peace and comfort that everyone seemed to enjoy.",
             slidervalue=2,
+            meanings= "Somewhat Feminine (2)",
             confidence_level=3,  # Moderately Confident
             reasoning_text="Descriptive and sensory language, but less emotional depth or relational focus compared to the first example.",
             font_size="18px"  # Custom font size for this example
@@ -340,6 +347,7 @@ def page4():
         display_example(
             example_text="**3** The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand.",
             slidervalue=3,
+            meanings= "Neutral (3)",
             confidence_level=3,  # Moderately Confident
             reasoning_text="Balanced tone, straightforward description without strong emotional or action-driven language.",
             font_size="18px"  # Custom font size for this example
@@ -349,6 +357,7 @@ def page4():
         display_example(
             example_text="**4** The project was completed on time due to careful planning and effective teamwork. Each task was broken down into manageable steps, ensuring efficiency throughout the process.",
             slidervalue=4,
+            meanings="Somewhat Masculine (4)",
             confidence_level=2,  # Somewhat Confident
             reasoning_text="Fact-focused, concise language emphasizing planning and action.",
             font_size="18px"  # Custom font size for this example
@@ -358,6 +367,7 @@ def page4():
         display_example(
             example_text="**5** The machine operates at peak efficiency under optimal conditions. Ensure all components are calibrated to specifications before proceeding with deployment.",
             slidervalue=5,
+            meanings="Very Masculine (5)",
             confidence_level=4,  # Very Confident
             reasoning_text="Direct, authoritative tone with technical and action-oriented language.",
             font_size="18px"  # Custom font size for this example
