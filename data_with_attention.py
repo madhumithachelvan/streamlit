@@ -7,16 +7,18 @@ def load_data():
 
 df = load_data()
 
-instructions = ["Please select 'Somewhat Feminine (2)' and '4: Very Confident. You were very certain about your judgment with no hesitation'",
-                "Please select 'Neutral (3)' and '4: Very Confident. You were very certain about your judgment with no hesitation'",
-                "Please select 'Very Feminine (5)' and '4: Very Confident. You were very certain about your judgment with no hesitation'"]
-answer = [2,3,5]
 random_rows = {
-    "id":[f"{i+1}" for i in range(3)],
-    "texts": [f"This is an attention check." for i in range(3)],
-    "is_attention_check":[True for i in range(3)],
-    "attention_check_instruction":instructions,
-    "expected_answer": answer
+    "id": [f"{i+1}" for i in range(3)],
+    "texts": [
+        f"This is an attention check. {instruction}"
+        for instruction in [
+            "Please select 'Somewhat Feminine (2)' and '4: Very Confident. You were very certain about your judgment with no hesitation'",
+            "Please select 'Neutral (3)' and '4: Very Confident. You were very certain about your judgment with no hesitation'",
+            "Please select 'Very Feminine (5)' and '4: Very Confident. You were very certain about your judgment with no hesitation'"
+        ]
+    ],
+    "is_attention_check": [True for _ in range(3)],
+    "expected_answer": [2, 3, 5]
 }
 
 random_df = pd.DataFrame(random_rows)

@@ -16,7 +16,6 @@ def sidebar_navigation():
         "Page 6": "Page 6",
         "Page 7": "Page 7",
         "Page 8": "Page 8",
-        "Page 9": "Page 9",
     }
     selected_page = st.sidebar.radio("Go to", list(pages.keys()))
     return pages[selected_page]
@@ -51,7 +50,7 @@ st.markdown(
 
 # Function for each page
 def page1():
-    st.title("Polit Study on Masculine/Feminine/Gender-Neutral Style Perception")
+    st.title("Pilot Study on Masculine/Feminine/Gender-Neutral Style Perception")
 
     st.markdown(
         '<p class="custom-text">We appreciate your feedback! Please fill out the survey below.</p>',
@@ -69,7 +68,7 @@ def page1():
 
         """
         <p class="header-large">Risks and Benefits </p>
-        <p class="custom-text">The risks associated with this pilot study are minimal and comparable to those encountered during routine computer-based tasks, such as mild fatigue or boredom. Texts included in this study are written by users on blog website and social media platforms, and may occasionally include words that could be sensitive or uncomfortable, though no extreme or offensive material is intentionally included. All texts included here do not represent the views of the researchers conducting the study. </p>
+        <p class="custom-text">The risks associated with this pilot study are minimal and comparable to those encountered during routine computer-based tasks, such as mild fatigue or boredom. Texts included in this study are written by users on blog website and social media platforms, and may occasionally include words that could be sensitive or uncomfortable, though no extreme or offensive material is intentionally included. The texts included in this study are not authored by the researchers and do not necessarily reflect their views. </p>
         <p class="custom-text">The primary benefit of participation is contributing to the understanding in the field of language and perceived gender expression. </p>
         
         <p class="header-large">Time required </p> 
@@ -107,12 +106,24 @@ def page1():
         """,
         unsafe_allow_html=True,
     )
+    if "consent" not in st.session_state:
+        st.session_state["consent"] = None
+
+        # Get the current consent value from session state
+    current_consent = st.session_state.get("consent")
+
+    # Set the index for the selectbox
+    consent_index = None if current_consent is None else ["I agree", "I do not agree"].index(current_consent)
+
+    # Create the selectbox
     st.session_state["consent"] = st.selectbox(
         "",
-        ["I agree", "I do not agree"],
-        index=None # Set index based on the stored value
+        options=["I agree", "I do not agree"],
+        index=consent_index,  # Set index based on the stored value
+        key="consent_selectbox",  # Unique key for the selectbox
     )
 
+    # Handle navigation based on consent
     if st.session_state.get("consent") is not None:
         if st.session_state["consent"] == "I agree":
             # Eligible participants can proceed to the next page
@@ -126,10 +137,12 @@ def page1():
             )
             # Disable the Next button for ineligible participants
             st.button("Next", disabled=True)
-
     else:
         # If no selection has been made, disable the Next button
         st.button("Next", disabled=True)
+
+
+
 
 
 
@@ -140,33 +153,17 @@ def page1():
 def page2():
 
 
-    st.session_state["english"] = st.selectbox(
-        "What is your reading level of English?",
-        ["Mother tongue", "Fluent", "Capable", "Elementary", "Still learning"],
-        index=None  # Set index based on the stored value
-    )
+    st.session_state["p_id"] = st.text_input("Please enter your Prolific ID", st.session_state.get("p_id", ""))
 
-    # Only perform the eligibility check if the user has made a selection
-    if st.session_state.get("english") is not None:
-        if st.session_state["english"] == "Mother tongue":
-            # Eligible participants can proceed to the next page
-            if st.button("Next"):
-                st.session_state["current_page"] = "Page 3"
-                st.rerun()
+    if st.button("Next", disabled=not st.session_state.get("p_id")):
+        # Check if the entered p_id is 1 (admin)
+        if st.session_state["p_id"] == "hongyuchen":
+            st.session_state["current_page"] = "Page 8"  # Redirect to the admin page
         else:
-            # Ineligible participants see a message and cannot proceed
-            st.error(
-                "You are ineligible for this study as you have provided information which is inconsistent with your Prolific prescreening responses. "
-                "Please return your submission on Prolific by selecting the 'Stop without completing' button."
-            )
-            # Disable the Next button for ineligible participants
-            st.button("Next", disabled=True)
-          #  st.button("Back", disabled=True)
-    else:
-        # If no selection has been made, disable the Next button
-        st.button("Next", disabled=True)
+            st.session_state["current_page"] = "Page 3"  # Redirect to the next page for non-admin users
+        st.rerun()
 
-    if st.button("Back", disabled=True, key="back_button"):  # Unique key for the Back button
+    if st.button("Back"):
         st.session_state["current_page"] = "Page 1"
         st.rerun()
 
@@ -175,24 +172,6 @@ def page2():
 
 
 def page3():
-
-
-    st.session_state["p_id"] = st.text_input("Please enter your Prolific ID", st.session_state.get("p_id", ""))
-
-
-
-    if st.button("Next", disabled=not st.session_state.get("p_id")):
-        st.session_state["current_page"] = "Page 4"
-        st.rerun()
-    if st.button("Back"):
-        st.session_state["current_page"] = "Page 2"
-        st.rerun()
-
-
-
-
-
-def page4():
     st.header('Guidelines for Annotating Masculine/Feminine Style from Texts')
     st.markdown(
         """
@@ -272,16 +251,15 @@ def page4():
 
 
     if st.button("Next"):
-        st.session_state["current_page"] = "Page 5"
+        st.session_state["current_page"] = "Page 4"
         st.rerun()
     if st.button("Back"):
-        st.session_state["current_page"] = "Page 3"
+        st.session_state["current_page"] = "Page 2"
         st.rerun()
 
 
 
-def page5():
-
+def page4():
 
     st.markdown(
         """
@@ -292,58 +270,112 @@ def page5():
         unsafe_allow_html=True,
     )
 
-    st.markdown(
-    """
-        <p class="custom-bold">1. Very Feminine (1) </p>
-        <div class="custom-bullet">
-            <em>"I couldn’t stop thinking about how kind and thoughtful her gesture was. It felt like a warm hug on a cold day, something I really needed. Perhaps it’s silly to be so sentimental, but it meant the world to me."</em><br>
-            <strong>Reasoning:</strong> Emotional tone, descriptive language, and use of hedging (perhaps) create a strong feminine impression.
-        </div> <br><br>
-        
-        <p class="custom-bold">2: Somewhat Feminine (2) </p>
-        <div class="custom-bullet">
-            <em>"The atmosphere was calming, with soft lighting and gentle music in the background. It created a sense of peace and comfort that everyone seemed to enjoy."</em><br>
-            <strong>Reasoning:</strong> Descriptive and sensory language, but less emotional depth or relational focus compared to the first example.
-        </div><br><br>
-        
-        <p class="custom-bold">3. Neutral (3)</p>
-        <div class="custom-bullet">
-            <em>"The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand."</em><br>
-            <strong>Reasoning:</strong> Balanced tone, straightforward description without strong emotional or action-driven language.
-        </div><br><br>
-        
-        <p class="custom-bold">4: Somewhat Masculine (4)</p>
-        <div class="custom-bullet">
-            <em>"The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand."</em><br>
-            <strong>Reasoning:</strong> Balanced tone, straightforward description without strong emotional or action-driven language.
-        </div><br><br>
-        
-        <p class="custom-bold">4: Somewhat Masculine (4)</p>
-        <div class="custom-bullet">
-            <em>"The project was completed on time due to careful planning and effective teamwork. Each task was broken down into manageable steps, ensuring efficiency throughout the process."</em><br><br>
-            <strong>Reasoning:</strong> Fact-focused, concise language emphasizing planning and action.
-        </div><br><br>
-        
-        <p class="custom-bold">5. Very Masculine (5)</p>
-        <div class="custom-bullet">
-            <em>"The machine operates at peak efficiency under optimal conditions. Ensure all components are calibrated to specifications before proceeding with deployment."</em><br>
-            <strong>Reasoning:</strong> Direct, authoritative tone with technical and action-oriented language.
-        </div> <br><br>
-        """,
+    def display_example(example_text, slidervalue, confidence_level, reasoning_text, font_size="16px"):
+        # Display example text with custom font size
+        st.markdown(f"<span style='font-size: {font_size};'><b>Example:</b> {example_text}</span>",
+                    unsafe_allow_html=True)
 
-        unsafe_allow_html=True,
-    )
+        colu1, colu2, colu3 = st.columns([1, 4, 1])
+
+        # Add "Very Feminine" label on the left
+        with colu1:
+            st.markdown("<div style='text-align: right;'>Very Feminine</div>", unsafe_allow_html=True)
+
+        # Add the slider in the middle
+        with colu2:
+            st.slider(
+                "",
+                min_value=0,
+                max_value=5,
+                step=1,
+                value=slidervalue,  # Link to session state (default to None)
+                key=f"slider_{example_text}",  # Unique key for the slider
+            )
+
+        # Add "Very Masculine" label on the right
+        with colu3:
+            st.markdown("<div style='text-align: left;'>Very Masculine</div>", unsafe_allow_html=True)
+
+
+            # Confidence level in a select box
+        c_options = {
+            1: "1: Not Confident. You were unsure or found the text ambiguous",
+            2: "2: Somewhat Confident. You made a judgment but still felt uncertain or had significant doubts",
+            3: "3: Moderately Confident. You felt reasonably sure of your judgment but had some doubts",
+            4: "4: Very Confident. You were very certain about your judgment with no hesitation"
+        }
+        st.selectbox(
+            "Confidence Level",
+            options=list(c_options.values()),
+            index=confidence_level - 1,  # Adjust index to match confidence level
+            key=f"confidence_{example_text}"
+        )
+        # Reasoning text box
+        st.text_area("Reasoning", reasoning_text, key=f"reasoning_{example_text}")
+
+        st.write("---")  # Separator between examples
+
+    # Main function
+    def main():
+
+        # Example 1: Very Feminine (1)
+        display_example(
+            example_text="**1** I couldn’t stop thinking about how kind and thoughtful her gesture was. It felt like a warm hug on a cold day, something I really needed. Perhaps it’s silly to be so sentimental, but it meant the world to me.",
+            slidervalue=1,
+            confidence_level=4,  # Very Confident
+            reasoning_text="Emotional tone, descriptive language, and use of hedging (perhaps) create a strong feminine impression.",
+            font_size="18px"  # Custom font size for this example
+        )
+
+        # Example 2: Somewhat Feminine (2)
+        display_example(
+            example_text="**2** The atmosphere was calming, with soft lighting and gentle music in the background. It created a sense of peace and comfort that everyone seemed to enjoy.",
+            slidervalue=2,
+            confidence_level=3,  # Moderately Confident
+            reasoning_text="Descriptive and sensory language, but less emotional depth or relational focus compared to the first example.",
+            font_size="18px"  # Custom font size for this example
+        )
+
+        # Example 3: Neutral (3)
+        display_example(
+            example_text="**3** The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand.",
+            slidervalue=3,
+            confidence_level=3,  # Moderately Confident
+            reasoning_text="Balanced tone, straightforward description without strong emotional or action-driven language.",
+            font_size="18px"  # Custom font size for this example
+        )
+
+        # Example 4: Somewhat Masculine (4)
+        display_example(
+            example_text="**4** The project was completed on time due to careful planning and effective teamwork. Each task was broken down into manageable steps, ensuring efficiency throughout the process.",
+            slidervalue=4,
+            confidence_level=2,  # Somewhat Confident
+            reasoning_text="Fact-focused, concise language emphasizing planning and action.",
+            font_size="18px"  # Custom font size for this example
+        )
+
+        # Example 5: Very Masculine (5)
+        display_example(
+            example_text="**5** The machine operates at peak efficiency under optimal conditions. Ensure all components are calibrated to specifications before proceeding with deployment.",
+            slidervalue=5,
+            confidence_level=4,  # Very Confident
+            reasoning_text="Direct, authoritative tone with technical and action-oriented language.",
+            font_size="18px"  # Custom font size for this example
+        )
+
+    if __name__ == "__main__":
+        main()
 
     if st.button("Next"):
-        st.session_state["current_page"] = "Page 6"
+        st.session_state["current_page"] = "Page 5"
         st.rerun()
     if st.button("Back"):
-        st.session_state["current_page"] = "Page 4"
+        st.session_state["current_page"] = "Page 3"
         st.rerun()
 
 
 
-def page6():
+def page5():
     st.header('Survey Instructions')
     st.markdown(
         """ 
@@ -417,10 +449,10 @@ def page6():
 
 
     if st.button("Next"):
-        st.session_state["current_page"] = "Page 7"
+        st.session_state["current_page"] = "Page 6"
         st.rerun()
     if st.button("Back"):
-        st.session_state["current_page"] = "Page 5"
+        st.session_state["current_page"] = "Page 4"
         st.rerun()
 
 
@@ -446,7 +478,7 @@ if "current_text_index" not in st.session_state:
     st.session_state["current_text_index"] = 0  # Start with the first text
 
 
-def page7():
+def page6():
     st.header("Survey Questions")
 
 
@@ -454,7 +486,6 @@ def page7():
     # Get the current text index
     current_index = st.session_state["current_text_index"]
 
-   # st.write(f"Debug: current_index = {current_index} (Type: {type(current_index)})")
     # Ensure current_index is an integer
     if not isinstance(current_index, int):
         st.error("Invalid current_index. Please ensure it is an integer.")
@@ -464,8 +495,8 @@ def page7():
     try:
         current_text = data.iloc[current_index]["texts"]  # Replace "text_column" with the actual column name
         is_attention_check = data.iloc[current_index].get("is_attention_check", False)
-        attention_check_instruction = data.iloc[current_index].get("attention_check_instruction", "")
-        expected_answer = data.iloc[current_index].get("expected_answer", None)
+    #   attention_check_instruction = data.iloc[current_index].get("attention_check_instruction", "")
+    #    expected_answer = data.iloc[current_index].get("expected_answer", None)
     except IndexError:
         st.error("Invalid index. The dataset does not have enough rows.")
         return
@@ -481,7 +512,7 @@ def page7():
                 """,
             unsafe_allow_html=True,
         )
-        st.warning(f"Attention Check: {attention_check_instruction}")
+      #  st.warning(f"Attention Check: {attention_check_instruction}")
     else:
         regular_texts = data[data["is_attention_check"] == False]
         regular_index = regular_texts.index.get_loc(current_index)
@@ -496,18 +527,9 @@ def page7():
             unsafe_allow_html=True,
         )
 
-    # Progress Slider (exclude attention checks)
-    total_regular_texts = len(data[data["is_attention_check"] == False])  # Count only regular texts
-    completed_regular_texts = sum(
-        1 for i, response in enumerate(st.session_state["responses"])
-        if not data.iloc[i].get("is_attention_check", False)  # Exclude attention checks
-        and response.get("style") is not None
-        and response.get("confidence") is not None
-    )
-    progress = completed_regular_texts / total_regular_texts
-    st.progress(progress)
-    st.write(f"Completed {completed_regular_texts} out of {total_regular_texts} texts.")
 
+
+# adjust for slider layout
 
     # Callback function to update the slider value in session state
     def update_slider():
@@ -528,87 +550,123 @@ def page7():
         # Use a unique key for the slider and link it to the callback
         selected_value = st.slider(
             "",
-            min_value=1,
+            min_value=0,
             max_value=5,
             step=1,
             value=slider_value,  # Link to session state (default to None)
             key="style_slider",  # Unique key for the slider
-            on_change=update_slider,  # Callback to update session state
+            on_change=update_slider,# Callback to update session state
         )
 
     # Add "Very Masculine" label on the right
     with col3:
         st.markdown("<div style='text-align: left;'>Very Masculine</div>", unsafe_allow_html=True)
 
+
     # Display the selected value (if any)
     if st.session_state["responses"][current_index].get("style") is not None:
-        st.write(f"Selected value: {st.session_state['responses'][current_index]['style']}")
+        selected_value = st.session_state["responses"][current_index]["style"]
+
+        # Map the selected value to its meaning
+        value_meanings = {
+            0: "Not Selected",
+            1: "Very Feminine",
+            2: "Somewhat Feminine",
+            3: "Neutral",
+            4: "Somewhat Masculine",
+            5: "Very Masculine"
+        }
+
+        # Get the meaning of the selected value
+        selected_meaning = value_meanings.get(selected_value, "Unknown")
+
+        # Display the selected value and its meaning
+        st.write(f"Selected value: {selected_value}: {selected_meaning}")
     else:
         st.write("No value selected yet.")
 
     # Confidence Level Selectbox
+
+    confidence_options = [
+        "1: Not Confident. You were unsure or found the text ambiguous",
+        "2: Somewhat Confident. You made a judgment but still felt uncertain or had significant doubts",
+        "3: Moderately Confident. You felt reasonably sure of your judgment but had some doubts",
+        "4: Very Confident. You were very certain about your judgment with no hesitation"
+    ]
+
+    # Retrieve the current confidence level from session state
+    current_confidence = st.session_state["responses"][current_index].get("confidence", None)
+    confidence_index = confidence_options.index(
+        current_confidence) if current_confidence in confidence_options else None
+
     st.session_state["responses"][current_index]["confidence"] = st.selectbox(
         "Confidence Level",
-        [
-            "1: Not Confident. You were unsure or found the text ambiguous",
-            "2: Somewhat Confident. You made a judgment but still felt uncertain or had significant doubts",
-            "3: Moderately Confident. You felt reasonably sure of your judgment but had some doubts",
-            "4: Very Confident. You were very certain about your judgment with no hesitation"
-        ],
-        index=None,  # No default selection
+        confidence_options,
+        index=confidence_index,  # Set the index to the current confidence level
         key=f"confidence_{current_index}",  # Unique key for the selectbox
     )
 
     # Comments Text Area
+    comments_key = f"comments_{current_index}"  # Unique key for the text area
     st.session_state["responses"][current_index]["comments"] = st.text_area(
         "Comments (Optional)",
         value=st.session_state["responses"][current_index].get("comments", ""),
-        key=f"comments_{current_index}",  # Unique key for the text area
+        key=comments_key,
     )
 
     # Navigation buttons
+
     col1, col2 = st.columns([1, 1])
     with col1:
         if st.button("Back"):
             if current_index > 0:
                 st.session_state["current_text_index"] -= 1  # Move to the previous text
             else:
-                st.session_state["current_page"] = "Page 6"  # Go back to Page 6
+                st.session_state["current_page"] = "Page 5"  # Go back to Page 5
             st.rerun()
     with col2:
-        is_slider_selected = st.session_state["responses"][current_index].get("style") is not None
+        # Check if both style and confidence are selected
+
+        is_slider_selected = st.session_state["responses"][current_index].get("style") is not None and st.session_state["responses"][current_index]["style"] != 0
         is_confidence_selected = st.session_state["responses"][current_index].get("confidence") is not None
-        if st.button("Next", disabled=not (is_slider_selected and is_confidence_selected)):
-            # Mark the current text as completed if both slider and confidence level are selected
-            #if is_attention_check:
-             #   if st.session_state["responses"][current_index].get("style") != expected_answer:
-              #      st.error(f"Attention check failed. Expected: {expected_answer}. Please follow the instructions.")
-              #      return
 
-            if is_slider_selected and is_confidence_selected:
-                st.session_state["responses"][current_index]["completed"] = True
 
+        # Enable the "Next" button only if both fields are filled
+        if st.button("Next", disabled=not (is_confidence_selected and is_slider_selected)):
+         #   st.session_state["responses"][current_index]["confidence"] = None
             if current_index < len(data) - 1:
                 st.session_state["current_text_index"] += 1  # Move to the next text
             else:
-                st.session_state["current_page"] = "Page 8"  # Move to Page 8
+                st.session_state["current_page"] = "Page 7"  # Move to Page 7
             st.rerun()
+        #if st.session_state["responses"][current_index].get("style", 0) == 0:
+        #    st.warning("Please select a value between 1 and 5 to proceed.")
 
     # Debugging: Show all responses
-    if st.checkbox("Show all responses"):
-        st.write(st.session_state["responses"])
+    #if st.checkbox("Show all responses"):
+    #   st.write(st.session_state["responses"])
 
     # Save responses to CSV
-    if st.button("Save Responses"):
-        responses_df = pd.DataFrame(st.session_state["responses"])
-        responses_df["text"] = data["texts"]  # Add the text column
-        responses_df.to_csv("responses.csv", index=False)
-        st.success("Your responses are saved!")
+    #if st.button("Save Responses"):
+        #   responses_df = pd.DataFrame(st.session_state["responses"])
+        #  responses_df["text"] = data["texts"]  # Add the text column
+        # responses_df.to_csv("responses.csv", index=False)
+        # st.success("Your responses are saved!")
+# Progress Slider (exclude attention checks)
+    total_regular_texts = len(data[data["is_attention_check"] == False])  # Count only regular texts
+    completed_regular_texts = sum(
+        1 for i, response in enumerate(st.session_state["responses"])
+        if not data.iloc[i].get("is_attention_check", False)  # Exclude attention checks
+        and response.get("style") is not None
+        and response.get("confidence") is not None
+    )
+    progress = completed_regular_texts / total_regular_texts
+    st.progress(progress)
+    st.write(f"Completed {completed_regular_texts} out of {total_regular_texts} texts.")
 
 
 
-
-def page8():
+def page7():
     st.title("Your Feedback Matters!")
 
     st.markdown(
@@ -622,20 +680,20 @@ def page8():
         """,
         unsafe_allow_html=True,
     )
-    st.session_state["comments"] = st.text_area(
+    st.session_state["feedback"] = st.text_area(
         "",
-        value=st.session_state.get("comments", ""),
+        value=st.session_state.get("feedback", ""),
     )
 
     if st.button("Next"):
-        st.session_state["current_page"] = "Page 9"
+        st.session_state["current_page"] = "Page 8"
         st.rerun()
     if st.button("Back"):
-        st.session_state["current_page"] = "Page 7"
+        st.session_state["current_page"] = "Page 6"
         st.rerun()
 
 
-def page9():
+def page8():
     st.title("End of Survey")
 
     st.markdown(
@@ -657,7 +715,7 @@ def page9():
     )
 
     if st.button("Back"):
-        st.session_state["current_page"] = "Page 8"
+        st.session_state["current_page"] = "Page 7"
         st.rerun()
 
     elif st.button("Submit", disabled=st.session_state.get("submitted", False)):# if the button can be clicked
@@ -672,7 +730,7 @@ def page9():
             responses_df = pd.DataFrame(st.session_state["responses"])
             responses_df["texts"] = data["texts"]  # Add the text column
             responses_df["p_id"] = st.session_state.get("p_id", "")  # Add Prolific ID
-            responses_df["english"] = st.session_state.get("english", "")  # Add English level
+            responses_df["feedback"] = st.session_state.get("feedback", "")  # Add feedback
             responses_df["consent"] = st.session_state.get("consent", "")  # Add consent status
 
             # Save to CSV
@@ -687,7 +745,7 @@ def page9():
             try:
                 # Save the responses to a new file
                 responses_df.to_csv(filename, index=False)
-                st.success(f"Thank you for your feedback! Your responses have been saved to {filename}.")
+                st.success(f"Thank you for your submission!")
 
                 # Mark the form as submitted
                 st.session_state["submitted"] = True
@@ -699,32 +757,38 @@ def page9():
             except Exception as e:
                 st.error(f"An error occurred while saving your response: {e}")
 
-    st.markdown("---")
-    st.header("Admin Section")
-    password = st.text_input("Enter the password to download responses", type="password")
 
-    admin_password = os.getenv("qwer", "qwer")
 
-    if password == admin_password:
-        st.success("Password verified. You can now download the responses.")
+    user_id = f"{st.session_state['p_id']}"
+    if user_id == "hongyuchen":
+        st.markdown("---")
+        st.header("Admin Section")
+        password = st.text_input("Enter the password to download responses", type="password")
 
-        # List all files matching the pattern "survey_responses_*.csv"
-        files = glob.glob("survey_responses_*.csv")
+        admin_password = os.getenv("arrsuccess", "arrsuccess")
 
-        if files:
-            st.write("Available response files:")
-            for file in files:
-                with open(file, "rb") as f:
-                    st.download_button(
-                        label=f"Download {file}",
-                        data=f,
-                        file_name=file,
-                        mime="text/csv",
-                    )
-        else:
-            st.warning("No response files found.")
-    elif password:
-        st.error("Incorrect password.")
+        if password == admin_password:
+            st.success("Password verified. You can now download the responses.")
+
+            # List all files matching the pattern "survey_responses_*.csv"
+            files = glob.glob("survey_responses_*.csv")
+
+            if files:
+                st.write("Available response files:")
+                for file in files:
+                    with open(file, "rb") as f:
+                        st.download_button(
+                            label=f"Download {file}",
+                            data=f,
+                            file_name=file,
+                            mime="text/csv",
+                        )
+            else:
+                st.warning("No response files found.")
+        elif password:
+            st.error("Incorrect password.")
+    #else:
+     #   st.warning("You do not have permission to access the admin section.")
 
 
 
@@ -749,7 +813,5 @@ elif st.session_state["current_page"] == "Page 7":
     page7()
 elif st.session_state["current_page"] == "Page 8":
     page8()
-elif st.session_state["current_page"] == "Page 9":
-    page9()
 
 
