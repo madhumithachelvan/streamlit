@@ -172,6 +172,7 @@ def page2():
 
 
 def page3():
+
     st.header('Guidelines for Annotating Masculine/Feminine Style from Texts')
     st.markdown(
         """

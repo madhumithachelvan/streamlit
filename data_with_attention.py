@@ -14,7 +14,7 @@ random_rows = {
         for instruction in [
             "Please select 'Somewhat Feminine (2)' and '4: Very Confident. You were very certain about your judgment with no hesitation'",
             "Please select 'Neutral (3)' and '4: Very Confident. You were very certain about your judgment with no hesitation'",
-            "Please select 'Very Feminine (5)' and '4: Very Confident. You were very certain about your judgment with no hesitation'"
+            "Please select 'Very Masculine (5)' and '4: Very Confident. You were very certain about your judgment with no hesitation'"
         ]
     ],
     "is_attention_check": [True for _ in range(3)],

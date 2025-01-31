@@ -172,6 +172,16 @@ def page2():
 
 
 def page3():
+    st.markdown(
+        """
+        <script>
+            window.addEventListener('load', function() {
+                window.scrollTo(0, 0);
+            });
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
     st.header('Guidelines for Annotating Masculine/Feminine Style from Texts')
     st.markdown(
         """
@@ -238,12 +248,19 @@ def page3():
             <ul>
                 <li>The text exhibits no clear tendencies toward either feminine or masculine linguistic features. </li>
             </ul>
-        </div><br><br>
+        </div>
         
 
         """, unsafe_allow_html=True
     )
+    st.markdown(
+        """
 
+        <p class="custom-bold"> On the next page, you'll find examples showing how texts are rated in each style for this study.  </p>
+        </p>
+
+        """, unsafe_allow_html=True
+    )
 
 
 
@@ -260,6 +277,16 @@ def page3():
 
 
 def page4():
+    st.markdown(
+        """
+        <script>
+            window.addEventListener('load', function() {
+                window.scrollTo(0, 0);
+            });
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.markdown(
         """
@@ -285,7 +312,7 @@ def page4():
         with colu2:
             st.slider(
                 "",
-                min_value=0,
+                min_value=1,
                 max_value=5,
                 step=1,
                 value=slidervalue,  # Link to session state (default to None)
@@ -325,7 +352,7 @@ def page4():
 
         # Example 1: Very Feminine (1)
         display_example(
-            example_text="**1** I couldn’t stop thinking about how kind and thoughtful her gesture was. It felt like a warm hug on a cold day, something I really needed. Perhaps it’s silly to be so sentimental, but it meant the world to me.",
+            example_text="**Text 1** I couldn’t stop thinking about how kind and thoughtful her gesture was. It felt like a warm hug on a cold day, something I really needed. Perhaps it’s silly to be so sentimental, but it meant the world to me.",
             slidervalue=1,
             meanings= "Very Feminine (1)",
             confidence_level=4,  # Very Confident
@@ -335,7 +362,7 @@ def page4():
 
         # Example 2: Somewhat Feminine (2)
         display_example(
-            example_text="**2** The atmosphere was calming, with soft lighting and gentle music in the background. It created a sense of peace and comfort that everyone seemed to enjoy.",
+            example_text="**Text 2** The atmosphere was calming, with soft lighting and gentle music in the background. It created a sense of peace and comfort that everyone seemed to enjoy.",
             slidervalue=2,
             meanings= "Somewhat Feminine (2)",
             confidence_level=3,  # Moderately Confident
@@ -345,7 +372,7 @@ def page4():
 
         # Example 3: Neutral (3)
         display_example(
-            example_text="**3** The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand.",
+            example_text="**Text 3** The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand.",
             slidervalue=3,
             meanings= "Neutral (3)",
             confidence_level=3,  # Moderately Confident
@@ -355,7 +382,7 @@ def page4():
 
         # Example 4: Somewhat Masculine (4)
         display_example(
-            example_text="**4** The project was completed on time due to careful planning and effective teamwork. Each task was broken down into manageable steps, ensuring efficiency throughout the process.",
+            example_text="**Text 4** The project was completed on time due to careful planning and effective teamwork. Each task was broken down into manageable steps, ensuring efficiency throughout the process.",
             slidervalue=4,
             meanings="Somewhat Masculine (4)",
             confidence_level=2,  # Somewhat Confident
@@ -365,7 +392,7 @@ def page4():
 
         # Example 5: Very Masculine (5)
         display_example(
-            example_text="**5** The machine operates at peak efficiency under optimal conditions. Ensure all components are calibrated to specifications before proceeding with deployment.",
+            example_text="**Text 5** The machine operates at peak efficiency under optimal conditions. Ensure all components are calibrated to specifications before proceeding with deployment.",
             slidervalue=5,
             meanings="Very Masculine (5)",
             confidence_level=4,  # Very Confident
@@ -390,7 +417,7 @@ def page5():
     st.markdown(
         """ 
         <p class="custom-text">
-        The texts (posts) provided below are divided into three parts. Each part will take an estimated 8 minutes to complete. For each text (post), please provide your perception on the writing style -- masculine/feminine/neutral.
+        There are 40 short texts (posts) provided in the following pages, which will take an estimated 25 minutes to complete. For each text (post), please provide your perception on the writing style -- masculine/feminine/neutral.
         </p>
     
     """,
@@ -446,6 +473,7 @@ def page5():
         """
         <div class="custom-bullet">
             <ul>
+                <li>To rate each style, please click on the slider or drag its handle to your desired position. </li>
                 <li>If you’re unsure, take a moment to re-read the text and focus on its overall style.</li>
                 <li>It’s okay to feel that some texts are ambiguous -- please express this uncertantity with the Confidence Score.</li>
                 <li>Thank you for your participation—your insights are valuable!</li>
@@ -487,11 +515,25 @@ if "responses" not in st.session_state:
 if "current_text_index" not in st.session_state:
     st.session_state["current_text_index"] = 0  # Start with the first text
 
-
 def page6():
     st.header("Survey Questions")
 
-
+    st.markdown(
+        """
+        <style>
+        /* Hide the slider handle initially */
+        .stSlider [data-baseweb="slider"] [role="slider"] {
+            opacity: 0;
+        }
+        /* Show the slider handle when the slider is focused or hovered */
+        .stSlider [data-baseweb="slider"]:hover [role="slider"],
+        .stSlider [data-baseweb="slider"]:focus [role="slider"] {
+            opacity: 1;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
     # Get the current text index
     current_index = st.session_state["current_text_index"]
@@ -546,31 +588,35 @@ def page6():
         st.session_state["responses"][current_index]["style"] = st.session_state["style_slider"]
 
     # Create columns for the labels and slider
-    col1, col2, col3 = st.columns([1, 4, 1])
+    col1, col2, col3, col4, col5 = st.columns(5)
 
     # Add "Very Feminine" label on the left
     with col1:
-        st.markdown("<div style='text-align: right;'>Very Feminine</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: left;'>Very Feminine</div>", unsafe_allow_html=True)
+    with col2:
+        st.markdown("<div style='text-align: left;'>Somewhat Feminine</div>", unsafe_allow_html=True)
 
     # Add the slider in the middle
-    with col2:
-        # Retrieve the slider value from session state or default to None
-        slider_value = st.session_state["responses"][current_index].get("style", None)
-
-        # Use a unique key for the slider and link it to the callback
-        selected_value = st.slider(
-            "",
-            min_value=0,
-            max_value=5,
-            step=1,
-            value=slider_value,  # Link to session state (default to None)
-            key="style_slider",  # Unique key for the slider
-            on_change=update_slider,# Callback to update session state
-        )
-
-    # Add "Very Masculine" label on the right
     with col3:
-        st.markdown("<div style='text-align: left;'>Very Masculine</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center;'>Neutral</div>", unsafe_allow_html=True)
+
+    with col4:
+        st.markdown("<div style='text-align: right;'>Somewhat Masculine</div>", unsafe_allow_html=True)
+    with col5:
+        st.markdown("<div style='text-align: right;'>Very Masculine</div>", unsafe_allow_html=True)
+
+    slider_value = st.session_state["responses"][current_index].get("style", None)
+
+    # Use a unique key for the slider and link it to the callback
+    selected_value = st.slider(
+        "",
+        min_value=1,
+        max_value=5,
+        step=1,
+        value=slider_value,  # Link to session state (default to None)
+        key="style_slider",  # Unique key for the slider
+        on_change=update_slider,  # Callback to update session state
+    )
 
 
     # Display the selected value (if any)
@@ -579,7 +625,6 @@ def page6():
 
         # Map the selected value to its meaning
         value_meanings = {
-            0: "Not Selected",
             1: "Very Feminine",
             2: "Somewhat Feminine",
             3: "Neutral",
@@ -591,11 +636,12 @@ def page6():
         selected_meaning = value_meanings.get(selected_value, "Unknown")
 
         # Display the selected value and its meaning
-        st.write(f"Selected value: {selected_value}: {selected_meaning}")
+        st.write(f"Selected value: **{selected_value}: {selected_meaning}**")
     else:
-        st.write("No value selected yet.")
+        st.write("**No value selected yet.**")
 
     # Confidence Level Selectbox
+
 
     confidence_options = [
         "1: Not Confident. You were unsure or found the text ambiguous",
@@ -616,6 +662,8 @@ def page6():
         key=f"confidence_{current_index}",  # Unique key for the selectbox
     )
 
+    st.markdown("---")
+
     # Comments Text Area
     comments_key = f"comments_{current_index}"  # Unique key for the text area
     st.session_state["responses"][current_index]["comments"] = st.text_area(
@@ -626,7 +674,7 @@ def page6():
 
     # Navigation buttons
 
-    col1, col2 = st.columns([1, 1])
+    col1, col5 = st.columns([4, 1])
     with col1:
         if st.button("Back"):
             if current_index > 0:
@@ -634,10 +682,10 @@ def page6():
             else:
                 st.session_state["current_page"] = "Page 5"  # Go back to Page 5
             st.rerun()
-    with col2:
+    with col5:
         # Check if both style and confidence are selected
 
-        is_slider_selected = st.session_state["responses"][current_index].get("style") is not None and st.session_state["responses"][current_index]["style"] != 0
+        is_slider_selected = st.session_state["responses"][current_index].get("style") is not None
         is_confidence_selected = st.session_state["responses"][current_index].get("confidence") is not None
 
 
