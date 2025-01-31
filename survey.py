@@ -760,7 +760,7 @@ def page8():
             <ul>
                 Please complete the following two steps to record your survey response and receive your reward:
                     <ul>
-                        <li> 1 = Make a note of this completion code: <strong>C10MGJC3</strong> </li>
+                        <li> 1 = Make a note of this completion code: <strong>C1DSW210</strong> </li>
                         <li> 2 = Click 'Submit' on this page to record your response </li>
                         <strong>If you do not complete the second step, we will not receive your data and will be unable to reward you.</strong>
                         <li> 3 = Enter the completion code on Prolific to register your submission </li>
