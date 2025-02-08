@@ -176,7 +176,7 @@ def page2():
 
 
 def page3():
-    col1, col2, col3 = st.columns([1, 6, 1])
+    col1, col2, col3 = st.columns([2, 6, 2])
     with col2:
         st.markdown(
             """
@@ -417,7 +417,7 @@ def page4():
 
 
 def page5():
-    col1, col2, col3 = st.columns([1, 6, 1])
+    col1, col2, col3 = st.columns([2, 6, 2])
     with col2:
         st.header('Survey Instructions')
         st.markdown(
