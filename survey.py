@@ -176,7 +176,7 @@ def page2():
 
 
 def page3():
-    col1, col2, col3 = st.columns([2,5,2])
+    col1, col2, col3 = st.columns([1, 6, 1])
     with col2:
         st.markdown(
             """
@@ -278,7 +278,7 @@ def page3():
 
 
 def page4():
-    col1, col2, col3 = st.columns([2, 9, 2])
+    col1, col2, col3 = st.columns([1, 6, 1])
     with col2:
         st.markdown(
             """
