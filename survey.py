@@ -278,7 +278,7 @@ def page3():
 
 
 def page4():
-    col1, col2, col3 = st.columns([1, 6, 1])
+    col1, col2, col3 = st.columns([2, 7, 2])
     with col2:
         st.markdown(
             """
@@ -813,7 +813,7 @@ def page7():
 
 
 def page8():
-    col1, col2, col3 = st.columns([3, 7, 3])
+    col1, col2, col3 = st.columns([2, 5, 2])
     with col2:
         st.title("End of Survey")
 
