@@ -40,7 +40,7 @@ st.markdown(
 
 # Function for each page
 def page1():
-    col1, col2, col3 = st.columns([2, 5, 2])
+    col1, col2, col3 = st.columns([1, 6, 1])
     with col2:
         st.title("Pilot Study on Masculine/Feminine/Gender-Neutral Style Perception")
 
@@ -153,7 +153,7 @@ def page1():
 
 
 def page2():
-    col1, col2, col3 = st.columns([2, 5, 2])
+    col1, col2, col3 = st.columns([1, 6, 1])
     with col2:
         st.session_state["p_id"] = st.text_input("Please enter your Prolific ID", st.session_state.get("p_id", ""))
 
@@ -417,7 +417,7 @@ def page4():
 
 
 def page5():
-    col1, col2, col3 = st.columns([2, 5, 2])
+    col1, col2, col3 = st.columns([1, 6, 1])
     with col2:
         st.header('Survey Instructions')
         st.markdown(
@@ -783,7 +783,7 @@ def page6():
 
 
 def page7():
-    col1, col2, col3 = st.columns([2, 5, 2])
+    col1, col2, col3 = st.columns([1, 6, 1])
     with col2:
         st.title("Your Feedback Matters!")
 
@@ -813,7 +813,7 @@ def page7():
 
 
 def page8():
-    col1, col2, col3 = st.columns([2, 5, 2])
+    col1, col2, col3 = st.columns([1, 6, 1])
     with col2:
         st.title("End of Survey")
 
