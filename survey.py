@@ -642,8 +642,8 @@ def page6():
             "Select a value:",
             scale_options,
             index=index_value,
-            key="style_ratio",
             on_change=update_slider,
+            key="style_ratio",
             horizontal=True,
         )
 
@@ -656,8 +656,9 @@ def page6():
                 "numeric": numeric_value,
                 "label": text_label
             }
-        else:
-            st.session_state["responses"][current_index]["style"] = None
+
+
+        st.write(f"Selected value: {selected_full_label}")
 
         # Confidence Level Selectbox
 
