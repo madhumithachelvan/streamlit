@@ -6,7 +6,7 @@ from datetime import datetime
 import glob
 
 
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
 
 
 
@@ -153,7 +153,7 @@ def page1():
 
 
 def page2():
-    col1, col2, col3 = st.columns([3,5,3])
+    col1, col2, col3 = st.columns([3, 5, 3])
     with col2:
         st.session_state["p_id"] = st.text_input("Please enter your Prolific ID", st.session_state.get("p_id", ""))
 
