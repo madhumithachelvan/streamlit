@@ -641,7 +641,7 @@ def page6():
             scale_options,
             index=index_value,
             on_change=update_slider,
-            key=f"style_ratio_{current_index}",
+            key="style_ratio",
             horizontal=True,
         )
 
