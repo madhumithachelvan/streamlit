@@ -813,7 +813,7 @@ def page7():
 
 
 def page8():
-    col1, col2, col3 = st.columns([2, 5, 2])
+    col1, col2, col3 = st.columns([3, 7, 3])
     with col2:
         st.title("End of Survey")
 
