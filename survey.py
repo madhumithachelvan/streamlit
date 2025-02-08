@@ -601,8 +601,6 @@ def page6():
                 unsafe_allow_html=True,
             )
 
-        # Create columns for the labels and slider
-        col1, col2, col3 = st.columns(3)
 
         # Use a unique key for the slider and link it to the callback
 
@@ -643,7 +641,7 @@ def page6():
             scale_options,
             index=index_value,
             on_change=update_slider,
-            key="style_ratio",
+            key=f"style_ratio_{current_index}",
             horizontal=True,
         )
 
@@ -656,6 +654,8 @@ def page6():
                 "numeric": numeric_value,
                 "label": text_label
             }
+            # Ensure UI state matches stored value
+            st.session_state[f"style_ratio_{current_index}"] = selected_full_label
 
 
         st.write(f"Selected value: {selected_full_label}")
