@@ -522,8 +522,7 @@ if "current_text_index" not in st.session_state:
 
 
 def page6():
-    col1, col2, col3 = st.columns([1, 3, 1])
-    with col2:
+
         st.header("Survey Questions")
         st.markdown(
             """
