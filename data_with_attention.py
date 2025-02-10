@@ -3,7 +3,7 @@
 import pandas as pd
 import random
 def load_data():
-    return pd.read_csv("sub_dataset_5.csv")
+    return pd.read_csv("dataset/sub_dataset_5.csv")
 
 df = load_data()
 
