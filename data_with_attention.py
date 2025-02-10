@@ -3,13 +3,13 @@
 import pandas as pd
 import random
 def load_data():
-    return pd.read_csv("data_pilot3.csv")
+    return pd.read_csv("sub_dataset_5.csv")
 
 df = load_data()
 
 random_rows = {
     "id": [f"{i+1}" for i in range(3)],
-    "texts": [
+    "short_text": [
         f"This is an attention check. {instruction}"
         for instruction in [
             "Please select 'Somewhat Feminine (2)' and '4: Very Confident. You were very certain about your judgment with no hesitation'",
@@ -41,7 +41,7 @@ for i in range(len(df) + len(random_df)):
         current_index += 1
 
 # Save the updated DataFrame to a CSV file
-output_file = "data_pilot3_attention.csv"
+output_file = "data_pilot8_attention.csv"
 combined_df.to_csv(output_file, index=False)  # Set index=False to avoid saving row indices to the CSV
 
 print(f"Updated dataset saved to {output_file}")

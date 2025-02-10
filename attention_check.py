@@ -1,7 +1,8 @@
+
 import pandas as pd
 import random
 def load_data():
-    return pd.read_csv("merged_survey_responses.csv")
+    return pd.read_csv("sub_dataset_6.csv.csv")
 
 
 df = load_data()

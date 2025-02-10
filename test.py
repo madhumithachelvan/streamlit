@@ -3,7 +3,7 @@ import glob
 
 
 # Define the path where your CSV files are stored
-file_path = "/Users/hongyuchen/Desktop/GE/streamlit/survey_responses_*.csv"  # Adjust accordingly
+file_path = "/Users/hongyuchen/Desktop/GE/streamlit/data_pilot*.csv"  # Adjust accordingly
 
 # Use glob to find all matching CSV files
 csv_files = glob.glob(file_path)
@@ -15,5 +15,16 @@ merged_df = pd.concat(df_list, ignore_index=True)  # Merging all into one DataFr
 # Display the first few rows
 print(merged_df.head())
 
+def load_data():
+    return pd.read_csv("sub_dataset_6.csv")
+
+
+df = load_data()
+
+
+combined = pd.concat([merged_df, df], axis=0, ignore_index=True)
 # Optional: Save merged data to a new CSV file
-merged_df.to_csv("merged_survey_responses.csv", index=False)
+combined.to_csv("combined.csv", index=False)
+print(combined.info())
+
+

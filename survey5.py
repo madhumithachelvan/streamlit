@@ -5,20 +5,10 @@ import os
 from datetime import datetime
 import glob
 
-def sidebar_navigation():
-    st.sidebar.title("Navigation")
-    pages = {
-        "Page 1": "Page 1",
-        "Page 2": "Page 2",
-        "Page 3": "Page 3",
-        "Page 4": "Page 4",
-        "Page 5": "Page 5",
-        "Page 6": "Page 6",
-        "Page 7": "Page 7",
-        "Page 8": "Page 8",
-    }
-    selected_page = st.sidebar.radio("Go to", list(pages.keys()))
-    return pages[selected_page]
+
+#st.set_page_config(layout="wide")
+
+
 
 st.markdown(
     """
@@ -56,13 +46,19 @@ def page1():
         '<p class="custom-text">We appreciate your feedback! Please fill out the survey below.</p>',
         unsafe_allow_html=True)
     st.header("Consent Form")
-    st.markdown('<p class="custom-text">You are invited to participate in a pilot study designed to explore perceptions of linguistic style in written text. Before you decide to participate, it is important that you understand why this study is being conducted and what your participation involves. Please read the following information carefully.</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="custom-text">You are invited to participate in a pilot study designed to explore perceptions of linguistic style in written text. Before you decide to participate, it is important that you understand why this study is being conducted and what your participation involves. Please read the following information carefully.</p>',
+        unsafe_allow_html=True)
     # Apply styles to headers and other elements
 
-# description of the project
+    # description of the project
     st.markdown('<p class="header-large">Description of the Research Study</p>', unsafe_allow_html=True)
-    st.markdown('<p class="custom-text">In this study, we aim to investigate how readers perceive the style of written texts as masculine, feminine, or gender-neutral. As an annotator, your task will involve evaluating a series of short texts based on their linguistic style, ranging from "Very Masculine" to "Very Feminine." This evaluation will focus on stylistic elements such as tone, word choice, and sentence structure rather than the content or topic of the text. Your contributions will help us create a dataset with gendered stylistic attributes, providing a foundation for understanding how people perceive gendered writing styles, the extent to which these perceptions align, and the reactions various styles evoke.</p>', unsafe_allow_html=True)
-    st.markdown('<p class="custom-text">The findings of this study will contribute to scientific knowledge and may be included in academic publications.</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="custom-text">In this study, we aim to investigate how readers perceive the style of written texts as masculine, feminine, or gender-neutral. As an annotator, your task will involve evaluating a series of short texts based on their linguistic style, ranging from "Very Masculine" to "Very Feminine." This evaluation will focus on stylistic elements such as tone, word choice, and sentence structure rather than the content or topic of the text. Your contributions will help us create a dataset with gendered stylistic attributes, providing a foundation for understanding how people perceive gendered writing styles, the extent to which these perceptions align, and the reactions various styles evoke.</p>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<p class="custom-text">The findings of this study will contribute to scientific knowledge and may be included in academic publications.</p>',
+        unsafe_allow_html=True)
 
     st.markdown(
 
@@ -70,31 +66,31 @@ def page1():
         <p class="header-large">Risks and Benefits </p>
         <p class="custom-text">The risks associated with this pilot study are minimal and comparable to those encountered during routine computer-based tasks, such as mild fatigue or boredom. Texts included in this study are written by users on blog website and social media platforms, and may occasionally include words that could be sensitive or uncomfortable, though no extreme or offensive material is intentionally included. The texts included in this study are not authored by the researchers and do not necessarily reflect their views. </p>
         <p class="custom-text">The primary benefit of participation is contributing to the understanding in the field of language and perceived gender expression. </p>
-        
+
         <p class="header-large">Time required </p> 
-        <p class="custom-text">Your participation will take an estimated 30 minutes. The time required may vary on an individual basis </p>
-        
+        <p class="custom-text">Your participation will take an estimated 35 minutes. The time required may vary on an individual basis </p>
+
         <p class="header-large">Voluntary Participation </p> 
         <p class="custom-text">Participation in this study is entirely voluntary. You may choose not to participate or withdraw from the study at any point without explanation. If you decide to withdraw, your data will not be included in the analysis, and you will not be paid. </p>
-        
+
         <p class="header-large">Confidentiality </p> 
         <p class="custom-text">Your responses will remain completely anonymous. Please refrain from sharing any personally identifiable information during the study. The researchers will take all necessary steps to ensure the confidentiality of your contributions. </p>
-        
+
         <p class="header-large">Contact </p> 
         <p class="custom-text">For questions about the study or to report any adverse effects, please contact the researcher at hongyu.chen@iris.uni-stuttgart.de / Hongyu.Chen@ims.uni-stuttgart.de.  </p>
-        
+
         <p class="header-large">Consent </p> 
         <p class="custom-text">Please indicate the information below that you are at least 18 years old, have read and understood this consent form, are comfortable using English to complete the task, and agree to participate in this research study </p>
-        
-        
-        
+
+
+
         """, unsafe_allow_html=True)
     st.markdown("""
-    - I am 18 years old or older.
-    - I have read this consent form or had it read to me.
-    - My mother tongue is English.
-    - I agree to participate in this research study and wish to proceed with the annotation task.
-    """)
+                - I am 18 years old or older.
+                - I have read this consent form or had it read to me.
+                - My mother tongue is English.
+                - I agree to participate in this research study and wish to proceed with the annotation task.
+                """)
     st.markdown(
         """
         <style>
@@ -150,9 +146,13 @@ def page1():
 
 
 
+
+
+
+
+
+
 def page2():
-
-
     st.session_state["p_id"] = st.text_input("Please enter your Prolific ID", st.session_state.get("p_id", ""))
 
     if st.button("Next", disabled=not st.session_state.get("p_id")):
@@ -171,8 +171,21 @@ def page2():
 
 
 
-def page3():
 
+
+
+
+def page3():
+    st.markdown(
+        """
+        <script>
+            window.addEventListener('load', function() {
+                window.scrollTo(0, 0);
+            });
+        </script>
+        """,
+        unsafe_allow_html=True,
+    )
     st.header('Guidelines for Annotating Masculine/Feminine Style from Texts')
     st.markdown(
         """
@@ -180,14 +193,12 @@ def page3():
         """, unsafe_allow_html=True
     )
     st.markdown("""
-    1. **Very Feminine:** The text is strongly perceived as feminine based on linguistic style.
-    2. **Somewhat Feminine:** The text has some feminine characteristics, but they are not dominant.
-    3. **Neutral:** The text has no noticeable masculine or feminine characteristics. 
-    4. **Somewhat Masculine:** The text has some masculine characteristics, but they are not dominant. 
-    5. **Very Masculine:** The text is strongly perceived as masculine based on linguistic style.
-    """)
-
-
+                1. **Very Feminine:** The text is strongly perceived as feminine based on linguistic style.
+                2. **Somewhat Feminine:** The text has some feminine characteristics, but they are not dominant.
+                3. **Neutral:** The text has no noticeable masculine or feminine characteristics. 
+                4. **Somewhat Masculine:** The text has some masculine characteristics, but they are not dominant. 
+                5. **Very Masculine:** The text is strongly perceived as masculine based on linguistic style.
+                """)
 
     st.markdown(
         """
@@ -196,7 +207,7 @@ def page3():
         </p>
         <p class="custom-text">These features are general tendencies and should guide, but not constrain, your perceptions. Base your rating on the overall impression of the text. 
         </p>
-        
+
         """, unsafe_allow_html=True
     )
 
@@ -239,17 +250,19 @@ def page3():
             <ul>
                 <li>The text exhibits no clear tendencies toward either feminine or masculine linguistic features. </li>
             </ul>
-        </div><br><br>
-        
+        </div>
+
 
         """, unsafe_allow_html=True
     )
+    st.markdown(
+        """
 
+        <p class="custom-bold"> On the next page, you'll find examples showing how texts are rated in each style for this study.  </p>
+        </p>
 
-
-
-
-
+        """, unsafe_allow_html=True
+    )
 
     if st.button("Next"):
         st.session_state["current_page"] = "Page 4"
@@ -260,7 +273,21 @@ def page3():
 
 
 
+
+
+
+
 def page4():
+    st.markdown(
+        """
+        <script>
+            window.addEventListener('load', function() {
+                window.scrollTo(0, 0);
+            });
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.markdown(
         """
@@ -271,39 +298,30 @@ def page4():
         unsafe_allow_html=True,
     )
 
-    def display_example(example_text, slidervalue, meanings, confidence_level, reasoning_text, font_size=""):
+    def display_example(example_text, scale_index, confidence_level, reasoning_text, font_size=""):
         # Display example text with custom font size
         st.markdown(f"<span style='font-size: {font_size};'><b>Example:</b> {example_text}</span>",
                     unsafe_allow_html=True)
 
-        colu1, colu2, colu3 = st.columns([1, 4, 1])
+        scale_options = [
+            "1: Very Feminine",
+            "2: Somewhat Feminine",
+            "3: Neutral",
+            "4: Somewhat Masculine",
+            "5: Very Masculine"
+        ]
 
-        # Add "Very Feminine" label on the left
-        with colu1:
-            st.markdown("<div style='text-align: right;'>Very Feminine</div>", unsafe_allow_html=True)
-
-        # Add the slider in the middle
-        with colu2:
-            st.slider(
-                "",
-                min_value=0,
-                max_value=5,
-                step=1,
-                value=slidervalue,  # Link to session state (default to None)
-                key=f"slider_{example_text}",  # Unique key for the slider
-            )
-
+        st.segmented_control(
+            "Select a scale:",
+            scale_options,
+            default=scale_index,  # Link to session state (default to None)
+            key=f"segmented_control_{example_text}",  # Unique key for the slider
+        )
 
         # Display the selected value and its meaning
-        st.write(f"Selected value: {slidervalue}: {meanings}")
+        st.write(f"Selected value: {scale_index}")
 
-        # Add "Very Masculine" label on the right
-        with colu3:
-            st.markdown("<div style='text-align: left;'>Very Masculine</div>", unsafe_allow_html=True)
-            # Map the selected value to its meaning
-
-
-            # Confidence level in a select box
+        # Confidence level in a select box
         c_options = {
             1: "1: Not Confident. You were unsure or found the text ambiguous",
             2: "2: Somewhat Confident. You made a judgment but still felt uncertain or had significant doubts",
@@ -326,9 +344,8 @@ def page4():
 
         # Example 1: Very Feminine (1)
         display_example(
-            example_text="**1** I couldn’t stop thinking about how kind and thoughtful her gesture was. It felt like a warm hug on a cold day, something I really needed. Perhaps it’s silly to be so sentimental, but it meant the world to me.",
-            slidervalue=1,
-            meanings= "Very Feminine (1)",
+            example_text="**Text 1** I couldn’t stop thinking about how kind and thoughtful her gesture was. It felt like a warm hug on a cold day, something I really needed. Perhaps it’s silly to be so sentimental, but it meant the world to me.",
+            scale_index="1: Very Feminine",
             confidence_level=4,  # Very Confident
             reasoning_text="Emotional tone, descriptive language, and use of hedging (perhaps) create a strong feminine impression.",
             font_size="18px"  # Custom font size for this example
@@ -336,9 +353,8 @@ def page4():
 
         # Example 2: Somewhat Feminine (2)
         display_example(
-            example_text="**2** The atmosphere was calming, with soft lighting and gentle music in the background. It created a sense of peace and comfort that everyone seemed to enjoy.",
-            slidervalue=2,
-            meanings= "Somewhat Feminine (2)",
+            example_text="**Text 2** The atmosphere was calming, with soft lighting and gentle music in the background. It created a sense of peace and comfort that everyone seemed to enjoy.",
+            scale_index="2: Somewhat Feminine",
             confidence_level=3,  # Moderately Confident
             reasoning_text="Descriptive and sensory language, but less emotional depth or relational focus compared to the first example.",
             font_size="18px"  # Custom font size for this example
@@ -346,9 +362,8 @@ def page4():
 
         # Example 3: Neutral (3)
         display_example(
-            example_text="**3** The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand.",
-            slidervalue=3,
-            meanings= "Neutral (3)",
+            example_text="**Text 3** The room was brightly lit, with several tables arranged in rows. People moved around, chatting casually but focused on the tasks at hand.",
+            scale_index="3: Neutral",
             confidence_level=3,  # Moderately Confident
             reasoning_text="Balanced tone, straightforward description without strong emotional or action-driven language.",
             font_size="18px"  # Custom font size for this example
@@ -356,9 +371,8 @@ def page4():
 
         # Example 4: Somewhat Masculine (4)
         display_example(
-            example_text="**4** The project was completed on time due to careful planning and effective teamwork. Each task was broken down into manageable steps, ensuring efficiency throughout the process.",
-            slidervalue=4,
-            meanings="Somewhat Masculine (4)",
+            example_text="**Text 4** The project was completed on time due to careful planning and effective teamwork. Each task was broken down into manageable steps, ensuring efficiency throughout the process.",
+            scale_index="4: Somewhat Masculine",
             confidence_level=2,  # Somewhat Confident
             reasoning_text="Fact-focused, concise language emphasizing planning and action.",
             font_size="18px"  # Custom font size for this example
@@ -366,12 +380,19 @@ def page4():
 
         # Example 5: Very Masculine (5)
         display_example(
-            example_text="**5** The machine operates at peak efficiency under optimal conditions. Ensure all components are calibrated to specifications before proceeding with deployment.",
-            slidervalue=5,
-            meanings="Very Masculine (5)",
+            example_text="**Text 5** The machine operates at peak efficiency under optimal conditions. Ensure all components are calibrated to specifications before proceeding with deployment.",
+            scale_index="5: Very Masculine",
             confidence_level=4,  # Very Confident
             reasoning_text="Direct, authoritative tone with technical and action-oriented language.",
             font_size="18px"  # Custom font size for this example
+        )
+        st.markdown(
+            """
+
+            <p class="custom-bold"> Our examples and reasoning are based on intuition and are provided mainly for your reference.  </p>
+            </p>
+
+            """, unsafe_allow_html=True
         )
 
     if __name__ == "__main__":
@@ -386,14 +407,17 @@ def page4():
 
 
 
+
+
+
 def page5():
     st.header('Survey Instructions')
     st.markdown(
         """ 
         <p class="custom-text">
-        The texts (posts) provided below are divided into three parts. Each part will take an estimated 8 minutes to complete. For each text (post), please provide your perception on the writing style -- masculine/feminine/neutral.
+        There are 40 short texts (posts) provided in the following pages, which will take an estimated 30 minutes to complete. For each text (post), please provide your perception on the writing style -- masculine/feminine/neutral.
         </p>
-    
+
     """,
         unsafe_allow_html=True)
 
@@ -403,12 +427,12 @@ def page5():
         """, unsafe_allow_html=True
     )
     st.markdown("""
-        1. **Very Feminine:** The text is strongly perceived as feminine based on linguistic style.
-        2. **Somewhat Feminine:** The text has some feminine characteristics, but they are not dominant.
-        3. **Neutral:** The text has no noticeable masculine or feminine characteristics. 
-        4. **Somewhat Masculine:** The text has some masculine characteristics, but they are not dominant. 
-        5. **Very Masculine:** The text is strongly perceived as masculine based on linguistic style.
-        """)
+                    1. **Very Feminine:** The text is strongly perceived as feminine based on linguistic style.
+                    2. **Somewhat Feminine:** The text has some feminine characteristics, but they are not dominant.
+                    3. **Neutral:** The text has no noticeable masculine or feminine characteristics. 
+                    4. **Somewhat Masculine:** The text has some masculine characteristics, but they are not dominant. 
+                    5. **Very Masculine:** The text is strongly perceived as masculine based on linguistic style.
+                    """)
 
     st.markdown(
         """
@@ -446,7 +470,8 @@ def page5():
     st.markdown(
         """
         <div class="custom-bullet">
-            <ul>
+            <ul> 
+                <li>There is no correct answer to each rating. Please follow your intuition to make the judgement. </li>
                 <li>If you’re unsure, take a moment to re-read the text and focus on its overall style.</li>
                 <li>It’s okay to feel that some texts are ambiguous -- please express this uncertantity with the Confidence Score.</li>
                 <li>Thank you for your participation—your insights are valuable!</li>
@@ -455,9 +480,6 @@ def page5():
         """,
         unsafe_allow_html=True,
     )
-
-
-
 
     if st.button("Next"):
         st.session_state["current_page"] = "Page 6"
@@ -471,11 +493,14 @@ def page5():
 
 
 
+
+
+
 # Function to display the current text and its UI elements
 # Load the dataset
 @st.cache_data
 def load_data():
-    return pd.read_csv("response/data_pilot2_attention.csv")
+    return pd.read_csv("data_pilot5_attention.csv")
 
 
 data = load_data()
@@ -489,10 +514,9 @@ if "current_text_index" not in st.session_state:
     st.session_state["current_text_index"] = 0  # Start with the first text
 
 
+
 def page6():
     st.header("Survey Questions")
-
-
 
     # Get the current text index
     current_index = st.session_state["current_text_index"]
@@ -504,7 +528,7 @@ def page6():
 
     # Display the current text from the dataset
     try:
-        current_text = data.iloc[current_index]["texts"]  # Replace "text_column" with the actual column name
+        current_text = data.iloc[current_index]["short_text"]  # Replace "text_column" with the actual column name
         is_attention_check = data.iloc[current_index].get("is_attention_check", False)
     #   attention_check_instruction = data.iloc[current_index].get("attention_check_instruction", "")
     #    expected_answer = data.iloc[current_index].get("expected_answer", None)
@@ -515,89 +539,62 @@ def page6():
     if is_attention_check:
         st.markdown(
             f"""
-                <div class="custom-text">
-                    <ul>
-                        <strong>[Attention Check] {current_text}</strong>
-                    </ul>
-                </div> <br><br>
-                """,
+                            <div class="custom-text">
+                                <ul>
+                                    <strong>[Attention Check] {current_text}</strong>
+                                </ul>
+                            </div> <br><br>
+                            """,
             unsafe_allow_html=True,
         )
-      #  st.warning(f"Attention Check: {attention_check_instruction}")
+
     else:
         regular_texts = data[data["is_attention_check"] == False]
         regular_index = regular_texts.index.get_loc(current_index)
         st.markdown(
             f"""
-                    <div class="custom-text">
-                        <ul>
-                            <strong>[Text {regular_index + 1}] {current_text}</strong>
-                        </ul>
-                    </div> <br><br>
-                    """,
+                                <div class="custom-text">
+                                    <ul>
+                                        <strong>[Text {regular_index + 1}] {current_text}</strong>
+                                    </ul>
+                                </div> <br><br>
+                                """,
             unsafe_allow_html=True,
         )
 
-
-
-# adjust for slider layout
-
-    # Callback function to update the slider value in session state
     def update_slider():
-        st.session_state["responses"][current_index]["style"] = st.session_state["style_slider"]
+        st.session_state["responses"][current_index]["style"] = st.session_state["style_segmented"]
 
-    # Create columns for the labels and slider
-    col1, col2, col3 = st.columns([1, 4, 1])
+    style_options = [
+        "1: Very Feminine",
+        "2: Somewhat Feminine",
+        "3: Neutral",
+        "4: Somewhat Masculine",
+        "5: Very Masculine"
+    ]
 
-    # Add "Very Feminine" label on the left
-    with col1:
-        st.markdown("<div style='text-align: right;'>Very Feminine</div>", unsafe_allow_html=True)
+    # Retrieve the slider value from session state or default to None
+    slider_value = st.session_state["responses"][current_index].get("style", None)
 
-    # Add the slider in the middle
-    with col2:
-        # Retrieve the slider value from session state or default to None
-        slider_value = st.session_state["responses"][current_index].get("style", None)
-
-        # Use a unique key for the slider and link it to the callback
-        selected_value = st.slider(
-            "",
-            min_value=0,
-            max_value=5,
-            step=1,
-            value=slider_value,  # Link to session state (default to None)
-            key="style_slider",  # Unique key for the slider
-            on_change=update_slider,# Callback to update session state
-        )
-
-    # Add "Very Masculine" label on the right
-    with col3:
-        st.markdown("<div style='text-align: left;'>Very Masculine</div>", unsafe_allow_html=True)
-
+    # Use a unique key for the slider and link it to the callback
+    selected_value = st.segmented_control(
+        "Select a scale:",
+        style_options,
+        default=slider_value,  # Link to session state (default to None)
+        key="style_segmented",  # Unique key for the slider
+        on_change=update_slider,  # Callback to update session state
+    )
 
     # Display the selected value (if any)
     if st.session_state["responses"][current_index].get("style") is not None:
         selected_value = st.session_state["responses"][current_index]["style"]
 
-        # Map the selected value to its meaning
-        value_meanings = {
-            0: "Not Selected",
-            1: "Very Feminine",
-            2: "Somewhat Feminine",
-            3: "Neutral",
-            4: "Somewhat Masculine",
-            5: "Very Masculine"
-        }
-
-        # Get the meaning of the selected value
-        selected_meaning = value_meanings.get(selected_value, "Unknown")
-
         # Display the selected value and its meaning
-        st.write(f"Selected value: {selected_value}: {selected_meaning}")
+        st.write(f"Selected value: {selected_value}")
     else:
         st.write("No value selected yet.")
 
     # Confidence Level Selectbox
-
     confidence_options = [
         "1: Not Confident. You were unsure or found the text ambiguous",
         "2: Somewhat Confident. You made a judgment but still felt uncertain or had significant doubts",
@@ -617,6 +614,8 @@ def page6():
         key=f"confidence_{current_index}",  # Unique key for the selectbox
     )
 
+    st.markdown("---")
+
     # Comments Text Area
     comments_key = f"comments_{current_index}"  # Unique key for the text area
     st.session_state["responses"][current_index]["comments"] = st.text_area(
@@ -627,7 +626,7 @@ def page6():
 
     # Navigation buttons
 
-    col1, col2 = st.columns([1, 1])
+    col1, col3 = st.columns([4, 1])
     with col1:
         if st.button("Back"):
             if current_index > 0:
@@ -635,35 +634,34 @@ def page6():
             else:
                 st.session_state["current_page"] = "Page 5"  # Go back to Page 5
             st.rerun()
-    with col2:
+    with col3:
         # Check if both style and confidence are selected
 
-        is_slider_selected = st.session_state["responses"][current_index].get("style") is not None and st.session_state["responses"][current_index]["style"] != 0
+        is_slider_selected = st.session_state["responses"][current_index].get("style") is not None
         is_confidence_selected = st.session_state["responses"][current_index].get("confidence") is not None
-
 
         # Enable the "Next" button only if both fields are filled
         if st.button("Next", disabled=not (is_confidence_selected and is_slider_selected)):
-         #   st.session_state["responses"][current_index]["confidence"] = None
+            #   st.session_state["responses"][current_index]["confidence"] = None
             if current_index < len(data) - 1:
                 st.session_state["current_text_index"] += 1  # Move to the next text
             else:
                 st.session_state["current_page"] = "Page 7"  # Move to Page 7
             st.rerun()
-        #if st.session_state["responses"][current_index].get("style", 0) == 0:
+        # if st.session_state["responses"][current_index].get("style", 0) == 0:
         #    st.warning("Please select a value between 1 and 5 to proceed.")
 
     # Debugging: Show all responses
-    #if st.checkbox("Show all responses"):
+    # if st.checkbox("Show all responses"):
     #   st.write(st.session_state["responses"])
 
     # Save responses to CSV
-    #if st.button("Save Responses"):
-        #   responses_df = pd.DataFrame(st.session_state["responses"])
-        #  responses_df["text"] = data["texts"]  # Add the text column
-        # responses_df.to_csv("responses.csv", index=False)
-        # st.success("Your responses are saved!")
-# Progress Slider (exclude attention checks)
+    # if st.button("Save Responses"):
+    #   responses_df = pd.DataFrame(st.session_state["responses"])
+    #  responses_df["text"] = data["texts"]  # Add the text column
+    # responses_df.to_csv("responses.csv", index=False)
+    # st.success("Your responses are saved!")
+    # Progress Slider (exclude attention checks)
     total_regular_texts = len(data[data["is_attention_check"] == False])  # Count only regular texts
     completed_regular_texts = sum(
         1 for i, response in enumerate(st.session_state["responses"])
@@ -674,6 +672,11 @@ def page6():
     progress = completed_regular_texts / total_regular_texts
     st.progress(progress)
     st.write(f"Completed {completed_regular_texts} out of {total_regular_texts} texts.")
+
+
+
+
+
 
 
 
@@ -704,6 +707,9 @@ def page7():
         st.rerun()
 
 
+
+
+
 def page8():
     st.title("End of Survey")
 
@@ -713,7 +719,7 @@ def page8():
             <ul>
                 Please complete the following two steps to record your survey response and receive your reward:
                     <ul>
-                        <li> 1 = Make a note of this completion code: <strong>C10MGJC3</strong> </li>
+                        <li> 1 = Make a note of this completion code: <strong>C1DSW210</strong> </li>
                         <li> 2 = Click 'Submit' on this page to record your response </li>
                         <strong>If you do not complete the second step, we will not receive your data and will be unable to reward you.</strong>
                         <li> 3 = Enter the completion code on Prolific to register your submission </li>
@@ -729,7 +735,7 @@ def page8():
         st.session_state["current_page"] = "Page 7"
         st.rerun()
 
-    elif st.button("Submit", disabled=st.session_state.get("submitted", False)):# if the button can be clicked
+    elif st.button("Submit", disabled=st.session_state.get("submitted", False)):  # if the button can be clicked
         # Create a unique identifier for the user
         user_id = f"{st.session_state['p_id']}"
 
@@ -739,10 +745,15 @@ def page8():
         else:
             # Save data
             responses_df = pd.DataFrame(st.session_state["responses"])
-            responses_df["texts"] = data["texts"]  # Add the text column
+            responses_df["texts"] = data["short_text"]  # Add the text column
+            responses_df["text_id"] = data["id"]
+            responses_df["label"] = data["label"]
+            responses_df["data"] = data["data"]
             responses_df["p_id"] = st.session_state.get("p_id", "")  # Add Prolific ID
             responses_df["feedback"] = st.session_state.get("feedback", "")  # Add feedback
-            responses_df["consent"] = st.session_state.get("consent", "")  # Add consent status
+            responses_df["consent"] = st.session_state.get("consent", "")
+            responses_df["style_score"] = responses_df['style'].str.split(":").str[0].astype(int)
+            responses_df["confidence_score"] = responses_df['confidence'].str.split(":").str[0].astype(int)
 
             # Save to CSV
 
@@ -751,7 +762,6 @@ def page8():
             submission_time = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d_%H-%M-%S')
             # Human-readable format
             filename = f"survey_responses_{user_id}_{submission_time}.csv"
-
 
             try:
                 # Save the responses to a new file
@@ -767,8 +777,6 @@ def page8():
                 st.session_state["submitted_users"].add(user_id)
             except Exception as e:
                 st.error(f"An error occurred while saving your response: {e}")
-
-
 
     user_id = f"{st.session_state['p_id']}"
     if user_id == "hongyuchen":
@@ -798,8 +806,12 @@ def page8():
                 st.warning("No response files found.")
         elif password:
             st.error("Incorrect password.")
-    #else:
-     #   st.warning("You do not have permission to access the admin section.")
+    # else:
+    #   st.warning("You do not have permission to access the admin section.")
+
+
+
+
 
 
 
