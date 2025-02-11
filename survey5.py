@@ -500,7 +500,7 @@ def page5():
 # Load the dataset
 @st.cache_data
 def load_data():
-    return pd.read_csv("data_pilot5_attention.csv")
+    return pd.read_csv("data_pilot8_attention.csv")
 
 
 data = load_data()
@@ -763,7 +763,8 @@ def page8():
             try:
                 # Save the responses to a new file
                 responses_df.to_csv(filename, index=False)
-                st.success(f"Thank you for your submission!")
+                st.success(f"Thank you for your submission!"
+                           f"\n\n Submission code: **C1N19CUR**. Please enter this code on Prolific to register your submission")
 
                 # Mark the form as submitted
                 st.session_state["submitted"] = True
@@ -787,8 +788,7 @@ def page8():
         admin_password = os.getenv("arrsuccess", "arrsuccess")
 
         if password == admin_password:
-            st.success(f"Thank you for your submission! "
-                       f"\n\n Submission code: **C1N19CUR**. Please enter this code on Prolific to register your submission")
+            st.success(f"Thank you for your submission! ")
 
             # List all files matching the pattern "survey_responses_*.csv"
             files = glob.glob("survey_responses_*.csv")
