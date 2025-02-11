@@ -68,7 +68,7 @@ def page1():
         <p class="custom-text">The primary benefit of participation is contributing to the understanding in the field of language and perceived gender expression. </p>
 
         <p class="header-large">Time required </p> 
-        <p class="custom-text">Your participation will take an estimated 35 minutes. The time required may vary on an individual basis </p>
+        <p class="custom-text">Your participation will take an estimated 30 minutes. The time required may vary on an individual basis </p>
 
         <p class="header-large">Voluntary Participation </p> 
         <p class="custom-text">Participation in this study is entirely voluntary. You may choose not to participate or withdraw from the study at any point without explanation. If you decide to withdraw, your data will not be included in the analysis, and you will not be paid. </p>
@@ -415,7 +415,7 @@ def page5():
     st.markdown(
         """ 
         <p class="custom-text">
-        There are 40 short texts (posts) provided in the following pages, which will take an estimated 30 minutes to complete. For each text (post), please provide your perception on the writing style -- masculine/feminine/neutral.
+        There are 40 short texts (posts) provided in the following pages, which will take an estimated 25 minutes to complete. For each text (post), please provide your perception on the writing style -- masculine/feminine/neutral.
         </p>
 
     """,
