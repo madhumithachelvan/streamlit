@@ -719,10 +719,9 @@ def page8():
             <ul>
                 Please complete the following two steps to record your survey response and receive your reward:
                     <ul>
-                        <li> 1 = Make a note of this completion code: <strong>C1DSW210</strong> </li>
-                        <li> 2 = Click 'Submit' on this page to record your response </li>
-                        <strong>If you do not complete the second step, we will not receive your data and will be unable to reward you.</strong>
-                        <li> 3 = Enter the completion code on Prolific to register your submission </li>
+                        <li> 1 = Click 'Submit' on this page to record your response and to obtain the completion code </li>
+                        <strong>If you do not complete the first step, we will not receive your data and will be unable to reward you.</strong>
+                        <li> 2 = Please enter the completion code on Prolific to register your submission </li>
                     </ul> 
                 </li><br>
             </ul>
@@ -731,11 +730,9 @@ def page8():
         unsafe_allow_html=True,
     )
 
-    if st.button("Back"):
-        st.session_state["current_page"] = "Page 7"
-        st.rerun()
 
-    elif st.button("Submit", disabled=st.session_state.get("submitted", False)):  # if the button can be clicked
+
+    if st.button("Submit", disabled=st.session_state.get("submitted", False)):  # if the button can be clicked
         # Create a unique identifier for the user
         user_id = f"{st.session_state['p_id']}"
 
@@ -777,6 +774,9 @@ def page8():
                 st.session_state["submitted_users"].add(user_id)
             except Exception as e:
                 st.error(f"An error occurred while saving your response: {e}")
+    elif st.button("Back"):
+        st.session_state["current_page"] = "Page 7"
+        st.rerun()
 
     user_id = f"{st.session_state['p_id']}"
     if user_id == "hongyuchen":
@@ -787,7 +787,8 @@ def page8():
         admin_password = os.getenv("arrsuccess", "arrsuccess")
 
         if password == admin_password:
-            st.success("Password verified. You can now download the responses.")
+            st.success(f"Thank you for your submission! "
+                       f"\n\n Submission code: **C1DSW210**. Please enter this code on Prolific to register your submission")
 
             # List all files matching the pattern "survey_responses_*.csv"
             files = glob.glob("survey_responses_*.csv")
