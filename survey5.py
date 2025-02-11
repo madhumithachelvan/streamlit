@@ -788,7 +788,7 @@ def page8():
 
         if password == admin_password:
             st.success(f"Thank you for your submission! "
-                       f"\n\n Submission code: **C1DSW210**. Please enter this code on Prolific to register your submission")
+                       f"\n\n Submission code: **C1N19CUR**. Please enter this code on Prolific to register your submission")
 
             # List all files matching the pattern "survey_responses_*.csv"
             files = glob.glob("survey_responses_*.csv")
