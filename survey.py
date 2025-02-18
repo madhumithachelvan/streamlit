@@ -764,7 +764,7 @@ def page8():
                 # Save the responses to a new file
                 responses_df.to_csv(filename, index=False)
                 st.success(f"Thank you for your submission! "
-                           f"\n\n Submission code: **C1DSW210**. Please enter this code on Prolific to register your submission")
+                           f"\n\n Submission code: ****. Please enter this code on Prolific to register your submission")
 
                 # Mark the form as submitted
                 st.session_state["submitted"] = True
