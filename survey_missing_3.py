@@ -528,7 +528,7 @@ def page6():
 
     # Display the current text from the dataset
     try:
-        current_text = data.iloc[current_index]["short_text"]  # Replace "text_column" with the actual column name
+        current_text = data.iloc[current_index]["texts"]  # Replace "text_column" with the actual column name
         is_attention_check = data.iloc[current_index].get("is_attention_check", False)
     #   attention_check_instruction = data.iloc[current_index].get("attention_check_instruction", "")
     #    expected_answer = data.iloc[current_index].get("expected_answer", None)
