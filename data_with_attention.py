@@ -3,7 +3,7 @@
 import pandas as pd
 import random
 def load_data():
-    return pd.read_csv("dataset/sub_dataset_5.csv")
+    return pd.read_csv("dataset/data_pilot3.csv")
 
 df = load_data()
 
@@ -41,7 +41,7 @@ for i in range(len(df) + len(random_df)):
         current_index += 1
 
 # Save the updated DataFrame to a CSV file
-output_file = "data_pilot8_attention.csv"
+output_file = "data_pilot3_attention.csv"
 combined_df.to_csv(output_file, index=False)  # Set index=False to avoid saving row indices to the CSV
 
 print(f"Updated dataset saved to {output_file}")
