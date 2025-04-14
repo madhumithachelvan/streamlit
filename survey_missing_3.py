@@ -742,7 +742,7 @@ def page8():
         else:
             # Save data
             responses_df = pd.DataFrame(st.session_state["responses"])
-            responses_df["texts"] = data["texts"]  # Add the text column
+            responses_df["texts"] = data["short_text"]  # Add the text column
             responses_df["text_id"] = data["id"]
          #   responses_df["label"] = data["label"]
          #   responses_df["data"] = data["data"]
