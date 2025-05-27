@@ -16,7 +16,7 @@ merged_df = pd.concat(df_list, ignore_index=True)  # Merging all into one DataFr
 print(merged_df.head())
 
 def load_data():
-    return pd.read_csv("sub_dataset_6.csv")
+    return pd.read_csv("dataset/sub_dataset_6.csv")
 
 
 df = load_data()

@@ -500,7 +500,7 @@ def page5():
 # Load the dataset
 @st.cache_data
 def load_data():
-    return pd.read_csv("data_pilot3_attention.csv")
+    return pd.read_csv("../data_pilot2_attention.csv")
 
 
 data = load_data()
@@ -744,8 +744,8 @@ def page8():
             responses_df = pd.DataFrame(st.session_state["responses"])
             responses_df["texts"] = data["short_text"]  # Add the text column
             responses_df["text_id"] = data["id"]
-         #   responses_df["label"] = data["label"]
-         #   responses_df["data"] = data["data"]
+            responses_df["label"] = data["label"]
+            responses_df["data"] = data["data"]
             responses_df["p_id"] = st.session_state.get("p_id", "")  # Add Prolific ID
             responses_df["feedback"] = st.session_state.get("feedback", "")  # Add feedback
             responses_df["consent"] = st.session_state.get("consent", "")
