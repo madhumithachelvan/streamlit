@@ -2,7 +2,7 @@
 import pandas as pd
 import random
 def load_data():
-    return pd.read_csv("sub_dataset_6.csv.csv")
+    return pd.read_csv("dataset/sub_dataset_6.csv")
 
 
 df = load_data()
