@@ -779,9 +779,9 @@ def page8():
                 responses_df["consent"] = st.session_state.get("consent", "")
                 responses_df["style_score"] = responses_df['style'].str.split(":").str[0].astype(int)
                 responses_df["confidence_score"] = responses_df['confidence'].str.split(":").str[0].astype(int)
-                
+
             except TypeError:
-                 print("An error occurred while saving your response. Please reload the page and do the survey again.")
+                 st.warning("An error occurred while saving your response. Please reload the page and do the survey again.")
 
             # Save to CSV
 
@@ -804,6 +804,7 @@ def page8():
                 if "submitted_users" not in st.session_state:
                     st.session_state["submitted_users"] = set()
                 st.session_state["submitted_users"].add(user_id)
+                
             except Exception as e:
                 st.error(f"An error occurred while saving your response: {e}")
 
