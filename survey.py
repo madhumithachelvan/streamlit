@@ -486,7 +486,8 @@ def page5():
             <ul> 
                 <li>There is no correct answer to each rating. Please follow your intuition to make the judgement. </li>
                 <li>If you’re unsure, take a moment to re-read the text and focus on its overall style.</li>
-                <li>It’s okay to feel that some texts are ambiguous -- please express this uncertantity with the Confidence Score.</li>
+                <li>It’s okay to feel that some texts are ambiguous -- please express this uncertainty with the Confidence Score.</li>
+                <li>Please be patient while answering, and check the progress bar at the bottom to make sure all 40 texts are completed.</li>
                 <li>Thank you for your participation—your insights are valuable!</li>
             </ul>
         </div> <br><br>
