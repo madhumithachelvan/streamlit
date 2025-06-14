@@ -782,6 +782,7 @@ def page8():
 
             except TypeError:
                  st.warning("An error occurred while saving your response. Please reload the page and do the survey again.")
+                 error_flag = True
 
             # Save to CSV
 
@@ -791,22 +792,23 @@ def page8():
             # Human-readable format
             filename = f"survey_responses_{user_id}_{submission_time}.csv"
 
-            try:
-                # Save the responses to a new file
-                responses_df.to_csv(filename, index=False)
-                st.success(f"Thank you for your submission! "
-                           f"\n\n Submission code: **C1DSW210**. Please enter this code on Prolific to register your submission")
+            if not error_flag:
+                try:
+                    # Save the responses to a new file
+                    responses_df.to_csv(filename, index=False)
+                    st.success(f"Thank you for your submission! "
+                            f"\n\n Submission code: **C1DSW210**. Please enter this code on Prolific to register your submission")
 
-                # Mark the form as submitted
-                st.session_state["submitted"] = True
+                    # Mark the form as submitted
+                    st.session_state["submitted"] = True
 
-                # Add the user to the set of submitted users
-                if "submitted_users" not in st.session_state:
-                    st.session_state["submitted_users"] = set()
-                st.session_state["submitted_users"].add(user_id)
-                
-            except Exception as e:
-                st.error(f"An error occurred while saving your response: {e}")
+                    # Add the user to the set of submitted users
+                    if "submitted_users" not in st.session_state:
+                        st.session_state["submitted_users"] = set()
+                    st.session_state["submitted_users"].add(user_id)
+
+                except Exception as e:
+                    st.error(f"An error occurred while saving your response: {e}")
 
     elif st.button("Back"):
         st.session_state["current_page"] = "Page 7"
