@@ -758,6 +758,8 @@ def page8():
 
 
     if st.button("Submit", disabled=st.session_state.get("submitted", False)):  # if the button can be clicked
+        for t in range(2):
+                time.sleep(.2)
         # Create a unique identifier for the user
         user_id = f"{st.session_state['p_id']}"
 
@@ -765,17 +767,21 @@ def page8():
         if user_id in st.session_state.get("submitted_users", set()):
             st.warning("You have already submitted the form. Thank you for your feedback!")
         else:
+            try:
             # Save data
-            responses_df = pd.DataFrame(st.session_state["responses"])
-            responses_df["texts"] = data["short_text"]  # Add the text column
-            responses_df["text_id"] = data["id"]
-            responses_df["label"] = data["label"]
-            responses_df["data"] = data["data"]
-            responses_df["p_id"] = st.session_state.get("p_id", "")  # Add Prolific ID
-            responses_df["feedback"] = st.session_state.get("feedback", "")  # Add feedback
-            responses_df["consent"] = st.session_state.get("consent", "")
-            responses_df["style_score"] = responses_df['style'].str.split(":").str[0].astype(int)
-            responses_df["confidence_score"] = responses_df['confidence'].str.split(":").str[0].astype(int)
+                responses_df = pd.DataFrame(st.session_state["responses"])
+                responses_df["texts"] = data["short_text"]  # Add the text column
+                responses_df["text_id"] = data["id"]
+                responses_df["label"] = data["label"]
+                responses_df["data"] = data["data"]
+                responses_df["p_id"] = st.session_state.get("p_id", "")  # Add Prolific ID
+                responses_df["feedback"] = st.session_state.get("feedback", "")  # Add feedback
+                responses_df["consent"] = st.session_state.get("consent", "")
+                responses_df["style_score"] = responses_df['style'].str.split(":").str[0].astype(int)
+                responses_df["confidence_score"] = responses_df['confidence'].str.split(":").str[0].astype(int)
+                
+            except TypeError:
+                 print("An error occurred while saving your response. Please reload the page and do the survey again.")
 
             # Save to CSV
 
