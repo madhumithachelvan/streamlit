@@ -760,6 +760,7 @@ def page8():
     if st.button("Submit", disabled=st.session_state.get("submitted", False)):  # if the button can be clicked
         for t in range(2):
                 time.sleep(.2)
+        error_flag = False
         # Create a unique identifier for the user
         user_id = f"{st.session_state['p_id']}"
 
