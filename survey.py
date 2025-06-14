@@ -642,7 +642,7 @@ def page6():
 
         # Enable the "Next" button only if both fields are filled
         if st.button("Next", disabled=not (is_confidence_selected and is_slider_selected)):
-            for t in range(3):
+            for t in range(2):
                 time.sleep(.2)
             #   st.session_state["responses"][current_index]["confidence"] = None
             if current_index < len(data) - 1:
