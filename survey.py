@@ -124,6 +124,8 @@ def page1():
         if st.session_state["consent"] == "I agree":
             # Eligible participants can proceed to the next page
             if st.button("Next"):
+                for t in range(2):
+                    time.sleep(.2)
                 st.session_state["current_page"] = "Page 2"
                 st.rerun()
         else:
@@ -156,6 +158,8 @@ def page2():
     st.session_state["p_id"] = st.text_input("Please enter your Prolific ID", st.session_state.get("p_id", ""))
 
     if st.button("Next", disabled=not st.session_state.get("p_id")):
+        for t in range(2):
+                time.sleep(.2)
         # Check if the entered p_id is 1 (admin)
         if st.session_state["p_id"] == "hongyuchen":
             st.session_state["current_page"] = "Page 8"  # Redirect to the admin page
@@ -164,6 +168,8 @@ def page2():
         st.rerun()
 
     if st.button("Back"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 1"
         st.rerun()
 
@@ -265,9 +271,13 @@ def page3():
     )
 
     if st.button("Next"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 4"
         st.rerun()
     if st.button("Back"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 2"
         st.rerun()
 
@@ -399,9 +409,12 @@ def page4():
         main()
 
     if st.button("Next"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 5"
         st.rerun()
-    if st.button("Back"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 3"
         st.rerun()
 
@@ -482,9 +495,13 @@ def page5():
     )
 
     if st.button("Next"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 6"
         st.rerun()
     if st.button("Back"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 4"
         st.rerun()
 
@@ -629,6 +646,8 @@ def page6():
     col1, col3 = st.columns([4, 1])
     with col1:
         if st.button("Back"):
+            for t in range(2):
+                time.sleep(.2)
             if current_index > 0:
                 st.session_state["current_text_index"] -= 1  # Move to the previous text
             else:
@@ -702,9 +721,13 @@ def page7():
     )
 
     if st.button("Next"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 8"
         st.rerun()
     if st.button("Back"):
+        for t in range(2):
+                time.sleep(.2)
         st.session_state["current_page"] = "Page 6"
         st.rerun()
 
